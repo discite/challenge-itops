@@ -1,18 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
 Vagrant.configure("2") do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-
   # Guias
   # https://manski.net/2016/09/vagrant-multi-machine-tutorial/
   # https://www.jeffgeerling.com/blog/2017/using-ansible-through-windows-10s-subsystem-linux
@@ -36,10 +25,15 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provision/playbook.yml"
+    ansible.verbose = true
+  end
+
   # Install avahi on all machines  
-  config.vm.provision "shell", inline: <<-SHELL
-    yum install -y avahi
-  SHELL
+  # config.vm.provision "shell", inline: <<-SHELL
+  #  yum install -y avahi
+  # SHELL
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

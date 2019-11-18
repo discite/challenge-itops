@@ -6,7 +6,7 @@ id -u challenge >/dev/null 2>&1 || useradd challenge
 passwd -d challenge
 usermod -aG wheel challenge
 
-yum update -y
+# yum update -y
 sudo yum install -y epel-release
 yum install -y nmon
 
